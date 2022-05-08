@@ -16,32 +16,6 @@ const MainPage = () => {
         previewLink: "",
     });
 
-    // fill object properties with selected book props
-    // useEffect(() => {
-    //     if (selectedBook !== null) {
-    //         setData({
-    //             title: selectedBook.volumeInfo.title,
-    //             author: selectedBook.volumeInfo.authors[0],
-    //             description: selectedBook.volumeInfo.description,
-    //             publishedDate: selectedBook.volumeInfo.publishedDate,
-    //             averageRating: selectedBook.volumeInfo.averageRating,
-    //             imageLink: selectedBook.volumeInfo.imageLinks.thumbnail,
-    //             previewLink: selectedBook.volumeInfo.previewLink,
-    //         });
-    //     }
-    // }, [selectedBook]);
-
-    // useEffect(() => {
-    //     console.log(data.title);
-    //     const fetchData = async () => {
-    //         const res = await axios.post("http://localhost:8080/books", data);
-    //     };
-
-    //     if (selectedBook !== null) {
-    //         fetchData();
-    //     }
-    // }, [selectedBook]);
-
     const handleInput = (e) => {
         e.preventDefault();
 
@@ -90,12 +64,13 @@ const MainPage = () => {
 
     return (
         <div id="MainPage" className="mt-10">
-            <div className="text-3xl">Find a book</div>
+            <div className="text-3xl flex justify-center font-bold">
+                Find a book
+            </div>
             <div className="flex items-center justify-center mt-3">
                 <div className="flex">
                     <input
                         onChange={handleInput}
-                        // value={inputValue}
                         id="title"
                         name="title"
                         type="text"
