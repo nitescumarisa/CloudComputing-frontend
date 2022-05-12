@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../utils/style.css";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
     const [inputValue, setInputValue] = useState("");
@@ -24,16 +25,21 @@ const MainPage = () => {
     };
 
     const addBook = async (book) => {
-        console.log(book);
         const title = book.volumeInfo.title;
         const author = book.volumeInfo.authors[0];
         const description = book.volumeInfo.description;
-        const publishedDate = book.volumeInfo.publishedDate;
-        const averageRating = book.volumeInfo.averageRating;
-        const imageLink = book.volumeInfo.imageLinks.thumbnail;
+        const publishedDate = book.volumeInfo.publishedDate
+            ? book.volumeInfo.publishedDate
+            : "Unknown";
+        const averageRating = book.volumeInfo.averageRating
+            ? book.volumeInfo.averageRating
+            : "Unknown";
+        const imageLink = book.volumeInfo.imageLinks.thumbnail
+            ? book.volumeInfo.imageLinks.thumbnail
+            : "Unknown";
         const previewLink = book.volumeInfo.previewLink;
 
-        console.log(title);
+        console.log(publishedDate);
 
         try {
             const response = await axios.post("http://localhost:8080/books", {
@@ -46,6 +52,7 @@ const MainPage = () => {
                 previewLink,
             });
             console.log(response);
+            alert("Ai adaugat cu succes cartea in contul tau.");
         } catch (err) {
             console.log(err);
         }
@@ -67,7 +74,17 @@ const MainPage = () => {
             <div className="text-3xl flex justify-center font-bold">
                 Find a book
             </div>
-            <div className="flex items-center justify-center mt-3">
+
+            <div className="inline-block flex justify-center">
+                <Link
+                    to="/my-account"
+                    className="inline-block flex justify-center font-bold hover:underline mt-3"
+                >
+                    Contul meu
+                </Link>
+            </div>
+
+            <div className="flex items-center justify-center mt-5">
                 <div className="flex">
                     <input
                         onChange={handleInput}

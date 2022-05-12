@@ -8,7 +8,7 @@ const MyAccount = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res = await axios.get("http://localhost:8080/books");
-            setBooks(res.data.books);
+            setBooks(res.data.books.reverse());
         };
 
         fetchData();
@@ -16,15 +16,27 @@ const MyAccount = () => {
 
     console.log(books);
 
+    const deleteBook = async (book) => {
+        try {
+            const response = await axios.delete(
+                `http://localhost:8080/books/${book.id}`
+            );
+            console.log(response);
+            window.location.reload();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <div className="bg-purple-200 bg-cover min-h-screen">
             <div className="flex justify-center text-3xl font-bold">
                 Favorite books
             </div>
             <div className="mt-4 ml-10">
-                {books.length &&
+                {books.length != 0 &&
                     books.map((book, index) => (
-                        <div className="mt-1 flex flex-row mb-7">
+                        <div className="mt-1 flex flex-row mt-7" key={book.id}>
                             {index + 1}.{" "}
                             <img
                                 className="mr-3 ml-2"
@@ -65,7 +77,10 @@ const MyAccount = () => {
                                 </div>
                                 : {book.description}
                                 <br />
-                                <button className="font-bold text-red-500 hover:underline">
+                                <button
+                                    className="font-bold text-red-500 hover:underline"
+                                    onClick={() => deleteBook(book)}
+                                >
                                     Delete
                                 </button>
                             </div>
