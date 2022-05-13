@@ -21,7 +21,7 @@ const MyAccount = () => {
     const deleteBook = async (book) => {
         try {
             const response = await axios.delete(
-                `${process.env.REACT_APP_API_URL}/${book.id}`
+                `${process.env.REACT_APP_API_URL}/books/${book.id}`
             );
             console.log(response);
             window.location.reload();
