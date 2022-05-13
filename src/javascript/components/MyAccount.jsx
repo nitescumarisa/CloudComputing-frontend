@@ -7,7 +7,9 @@ const MyAccount = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get("http://localhost:8080/books");
+            const res = await axios.get(
+                `${process.env.REACT_APP_API_URL}/books`
+            );
             setBooks(res.data.books.reverse());
         };
 
@@ -19,7 +21,7 @@ const MyAccount = () => {
     const deleteBook = async (book) => {
         try {
             const response = await axios.delete(
-                `http://localhost:8080/books/${book.id}`
+                `${process.env.REACT_APP_API_URL}/${book.id}`
             );
             console.log(response);
             window.location.reload();

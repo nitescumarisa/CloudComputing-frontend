@@ -42,15 +42,18 @@ const MainPage = () => {
         console.log(publishedDate);
 
         try {
-            const response = await axios.post("http://localhost:8080/books", {
-                title,
-                author,
-                description,
-                publishedDate,
-                averageRating,
-                imageLink,
-                previewLink,
-            });
+            const response = await axios.post(
+                `${process.env.REACT_APP_API_URL}/books`,
+                {
+                    title,
+                    author,
+                    description,
+                    publishedDate,
+                    averageRating,
+                    imageLink,
+                    previewLink,
+                }
+            );
             console.log(response);
             alert("Ai adaugat cu succes cartea in contul tau.");
         } catch (err) {
